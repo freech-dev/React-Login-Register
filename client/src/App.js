@@ -1,14 +1,13 @@
 import React from "react";
 import "./App.css";
-import Login from "./Login";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./Router";
 
 function App() {
   return (
-    <div className="container">
-      <div className="loginForm">
-        <Login />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 }
 

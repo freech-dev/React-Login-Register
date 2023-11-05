@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import "./App.css";
+import { useHistory } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
+  const history = useHistory();
 
   const login = (e) => {
     e.preventDefault();
     Axios.post("http://localhost:3001/login", {
       username: username,
       password: password,
-    }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
-      } else {
-        setLoginStatus(response.data[0].email);
-      }
-    });
+    })
+      .then((response) => {
+        if (response.data.message) {
+          setLoginStatus(response.data.message);
+        } else {
+          setLoginStatus(response.data[0].email);
+          history.push("/dashboard"); // Redirect to dashboard after successful login
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
