@@ -1,37 +1,36 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
-import { useHistory } from "react-router-dom";
+import "./App.css";
 
 function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
-  const history = useHistory();
 
   const login = (e) => {
     e.preventDefault();
     Axios.post("http://localhost:3001/login", {
       username: username,
       password: password,
-    })
-      .then((response) => {
-        if (response.data.message) {
-          setLoginStatus(response.data.message);
-        } else {
-          setLoginStatus(response.data[0].email);
-          history.push("/dashboard"); // Redirect to dashboard after successful login
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    }).then((response) => {
+      if (response.data.message) {
+        setLoginStatus(response.data.message);
+      } else {
+        setLoginStatus(response.data[0].email);
+        navigate("/dashboard"); // Redirect to the dashboard
+      }
+    });
   };
 
   return (
-    <form>
-      <h4>Login Here</h4>
-      <label htmlFor="username">Username</label>
-      <input
+    <div className="container">
+        <div className="loginForm">
+            <form>
+                <h4>Login Here</h4>
+                <label htmlFor="username">Username</label>
+         <input
         className="textInput"
         type="text"
         name="username"
@@ -64,6 +63,8 @@ function Login() {
         {loginStatus}
       </h1>
     </form>
+    </div>
+    </div>
   );
 }
 
