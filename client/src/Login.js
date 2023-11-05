@@ -19,7 +19,7 @@ function Login() {
         setLoginStatus(response.data.message);
       } else {
         setLoginStatus(response.data[0].email);
-        navigate("/dashboard"); // Redirect to the dashboard
+        navigate("/dashboard");
       }
     });
   };
