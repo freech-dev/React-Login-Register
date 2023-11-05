@@ -8,13 +8,13 @@ app.use(express.json());
 app.use(cors());
 
 const con = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "",
-    database: "register"
+    user: "u5_JVWJMGHDon",
+    host: "66.11.113.252",
+    password: "Km1.WY@ghTzmSB=uXezk09ru",
+    database: "s5_ReactDB"
 })
 
-app.post('/register', (req, res) => {
+app.post('/create-account', (req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
@@ -41,7 +41,7 @@ app.post("/login", (req, res) => {
                 if(result.length > 0){
                     res.send(result);
                 }else{
-                    res.send({message: "WRONG USERNAME OR PASSWORD!"})
+                    res.send({message: "Incorrect Details"})
                 }
             }
         }
